@@ -133,6 +133,7 @@
       <div class="nav-row">
         <button class="sub" id="study-prev">前へ</button>
         <button class="sub" id="study-learn">覚えた ✓</button>
+        <button class="sub" id="study-shuffle">順番をシャッフル</button>
         <button class="sub" id="study-next">次へ</button>
       </div>
       <details>
@@ -222,28 +223,36 @@ var BUILTIN_SETS = [
   { id: "it-sample", title: "ITサンプル問題（内蔵・オリジナル）", builtin: true, items: [
     { q: "社内のパソコンから、社外の事業者が用意したサーバ上にある業務システムを、インターネット経由で利用している。この利用形態を何というか。",
       a: "クラウドサービスの利用", ch: ["クラウドサービスの利用", "オンプレミス運用", "内製化", "プロトタイプ開発"],
-      ex: "自社にサーバを置かず、事業者のコンピュータをネット経由で使う形がクラウドです。自社に置く形はオンプレミスと呼びます。" },
+      ex: "自社にサーバを置かず、事業者のコンピュータをネット経由で使う形がクラウドです。自社に置く形はオンプレミスと呼びます。",
+      why: { "オンプレミス運用": "オンプレミスは自社にサーバを置いて運用する形です。この問題は社外の事業者のサーバを使っているので違います。", "内製化": "内製化は、外部に頼んでいた開発や業務を自社で行うようにすることです。利用形態の話ではないので違います。", "プロトタイプ開発": "プロトタイプは試作品を作る工程です。システムの利用形態ではないので違います。" } },
     { q: "データベースで、1件1件のデータを表す「横の1行」を何というか。",
       a: "レコード", ch: ["レコード", "カラム", "テーブル", "フィールド名"],
-      ex: "横の1行＝レコード、縦の列＝カラム、表全体＝テーブルです。" },
+      ex: "横の1行＝レコード、縦の列＝カラム、表全体＝テーブルです。",
+      why: { "カラム": "カラムは縦の列（項目）のことです。横の1行ではないので違います。", "テーブル": "テーブルは表全体のことです。1行だけを指す言葉ではないので違います。", "フィールド名": "フィールド名は項目の名前のことです。データ1件分を指す言葉ではないので違います。" } },
     { q: "会員番号のように、レコードを1つに特定でき、重複しない値を持つ項目を何というか。",
       a: "主キー", ch: ["主キー", "外部キー", "インデックス", "ビュー"],
-      ex: "1件を特定するための項目が主キーです。別の表と結びつける項目は外部キーです。" },
+      ex: "1件を特定するための項目が主キーです。別の表と結びつける項目は外部キーです。",
+      why: { "外部キー": "外部キーは別の表と結びつけるための項目です。1件を特定する役割ではないので違います。", "インデックス": "インデックスは検索を速くするための仕組みです。レコードを特定する項目そのものではないので違います。", "ビュー": "ビューは表をもとに作る仮想的な表です。項目の種類ではないので違います。" } },
     { q: "システム開発の最初の工程で、「何を作るか」「どんな機能が必要か」を決める作業はどれか。",
       a: "要件定義", ch: ["要件定義", "運用", "保守", "テスト"],
-      ex: "作るものを決める最初の工程が要件定義です。ここが曖昧だと後の工程で手戻りが大きくなります。" },
+      ex: "作るものを決める最初の工程が要件定義です。ここが曖昧だと後の工程で手戻りが大きくなります。",
+      why: { "運用": "運用は完成したあとに動かし続ける仕事です。最初の工程ではないので違います。", "保守": "保守は完成後の修正や改善の仕事です。作るものを決める工程ではないので違います。", "テスト": "テストは作ったものが正しく動くか確かめる工程です。最初に決める作業ではないので違います。" } },
     { q: "パスワードに加えて、スマートフォンに送られる確認コードでも本人確認を行う仕組みはどれか。",
       a: "二要素認証", ch: ["二要素認証", "暗号化", "バックアップ", "ファイアウォール"],
-      ex: "知識（パスワード）と所持（スマホ）など、異なる要素を組み合わせるのが二要素認証です。" },
+      ex: "知識（パスワード）と所持（スマホ）など、異なる要素を組み合わせるのが二要素認証です。",
+      why: { "暗号化": "暗号化はデータを読みにくい形に変える処理です。本人確認の仕組みではないので違います。", "バックアップ": "バックアップはデータの控えを取ることです。本人確認とは関係ないので違います。", "ファイアウォール": "ファイアウォールは不正な通信を防ぐ仕組みです。本人確認の方法ではないので違います。" } },
     { q: "インターネット上で商品を売買する仕組みや活動を指す言葉はどれか。",
       a: "EC", ch: ["EC", "DX", "API", "OS"],
-      ex: "ECはElectronic Commerceの略で、ネットショップなどが代表例です。" },
+      ex: "ECはElectronic Commerceの略で、ネットショップなどが代表例です。",
+      why: { "DX": "DXはデジタル技術で業務やビジネスを変えていくことです。売買そのものを指す言葉ではないので違います。", "OS": "OSはコンピュータを管理する基本ソフトです。売買の仕組みではないので違います。", "API": "APIはソフト同士のやり取りの窓口です。売買の仕組みではないので違います。" } },
     { q: "ソフト同士が、決められた形式で機能やデータをやり取りするための窓口を何というか。",
       a: "API", ch: ["API", "CPU", "SSD", "SQL"],
-      ex: "APIはソフト同士の約束事です。SQLはデータベースへの指示言語、という違いがあります。" },
+      ex: "APIはソフト同士の約束事です。SQLはデータベースへの指示言語、という違いがあります。",
+      why: { "CPU": "CPUは計算や制御を行う処理装置です。ソフト同士の窓口ではないので違います。", "SSD": "SSDはデータを保存する装置です。やり取りの約束事ではないので違います。", "SQL": "SQLはデータベースに指示を出す言語です。ソフト同士の窓口そのものではないので違います。" } },
     { q: "故障や誤削除に備えて、データの控えを別の場所に保管しておくことを何というか。",
       a: "バックアップ", ch: ["バックアップ", "暗号化", "圧縮", "同期"],
-      ex: "控えを取ることがバックアップです。暗号化は読みにくくする処理で、目的が異なります。" }
+      ex: "控えを取ることがバックアップです。暗号化は読みにくくする処理で、目的が異なります。",
+      why: { "暗号化": "暗号化はデータを読みにくくする処理です。控えを取ることではないので違います。", "圧縮": "圧縮はデータのサイズを小さくすることです。控えを別の場所に保管することではないので違います。", "同期": "同期は複数の場所の内容を同じ状態に保つことです。被害に備えた控えとは目的が違うので違います。" } }
   ]}
 ];
 
@@ -258,6 +267,7 @@ function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } c
 function allSets() { return BUILTIN_SETS.concat(state.customSets); }
 function getSet(id) { var s = allSets(); for (var i = 0; i < s.length; i++) if (s[i].id === id) return s[i]; return null; }
 function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+function trunc(s, n) { s = String(s || ""); return s.length > n ? s.slice(0, n) + "…" : s; }
 function shuffle(arr) { var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
 function toast(msg) { var t = document.getElementById("toast"); t.textContent = msg; t.classList.remove("hidden"); setTimeout(function(){ t.classList.add("hidden"); }, 2600); }
 function wrongKey(setId, q) { return setId + "::" + q; }
@@ -265,7 +275,7 @@ function wrongCountFor(setId) { var n = 0; state.wrong.forEach(function(w){ if (
 function recordWrong(set, item) {
   var k = wrongKey(set.id, item.q);
   var exists = state.wrong.some(function(w){ return w.key === k; });
-  if (!exists) { state.wrong.push({ key: k, setId: set.id, setTitle: set.title, q: item.q, a: item.a, ex: item.ex || "", ch: item.ch || null, qa: !!item.qa }); save(); }
+  if (!exists) { state.wrong.push({ key: k, setId: set.id, setTitle: set.title, q: item.q, a: item.a, ex: item.ex || "", ch: item.ch || null, qa: !!item.qa, why: item.why || null }); save(); }
 }
 function removeWrong(setId, q) {
   var k = wrongKey(setId, q);
@@ -440,6 +450,10 @@ function renderStudy() {
 document.getElementById("flash").addEventListener("click", function(){ study.flipped = !study.flipped; renderStudy(); });
 document.getElementById("study-prev").addEventListener("click", function(){ if (study.idx > 0) { study.idx--; study.flipped = false; renderStudy(); } });
 document.getElementById("study-next").addEventListener("click", function(){ if (study.idx < study.set.items.length - 1) { study.idx++; study.flipped = false; renderStudy(); } });
+document.getElementById("study-shuffle").addEventListener("click", function() {
+  study.set = { id: study.set.id, title: study.set.title, builtin: study.set.builtin, items: shuffle(study.set.items) };
+  study.idx = 0; study.flipped = false; renderStudy(); toast("カードの順番をシャッフルしました");
+});
 document.getElementById("study-learn").addEventListener("click", function() {
   var set = study.set, item = set.items[study.idx];
   var arr = state.learned[set.id] || (state.learned[set.id] = []);
@@ -456,14 +470,17 @@ function buildQuestions(items, count) {
   pool.forEach(function(item) {
     if (item.ch && item.ch.length >= 2 && item.ch.indexOf(item.a) >= 0) {
       var ch = shuffle(item.ch);
-      qs.push({ item: item, kind: "choice", qText: item.q, choices: ch, correctIdx: ch.indexOf(item.a), explain: item.ex || item.a });
+      qs.push({ item: item, kind: "choice", qText: item.q, choices: ch, correctIdx: ch.indexOf(item.a), explain: item.ex || item.a,
+        choiceWhy: ch.map(function(c){ return (item.why && item.why[c]) || null; }) });
       return;
     }
     if (item.qa) {
       var others = shuffle(items.filter(function(o){ return o !== item && o.a; })).slice(0, 3);
       if (others.length >= 3) {
-        var ch2 = shuffle([item.a].concat(others.map(function(o){ return o.a; })));
-        qs.push({ item: item, kind: "choice", qText: item.q, choices: ch2, correctIdx: ch2.indexOf(item.a), explain: item.ex || item.a });
+        var pairs = shuffle([{ t: item.a, src: item }].concat(others.map(function(o){ return { t: o.a, src: o }; })));
+        qs.push({ item: item, kind: "choice", qText: item.q, choices: pairs.map(function(p2){ return p2.t; }),
+          correctIdx: pairs.findIndex(function(p2){ return p2.src === item; }), explain: item.ex || item.a,
+          choiceWhy: pairs.map(function(p2){ return p2.src === item ? null : "その答えは別の問題「" + trunc(p2.src.q, 40) + "」の答えです。"; }) });
       } else {
         qs.push({ item: item, kind: "self", qText: item.q, choices: null, correctIdx: -1, explain: item.ex || "" });
       }
@@ -472,11 +489,15 @@ function buildQuestions(items, count) {
     var othersT = shuffle(items.filter(function(o){ return o !== item; })).slice(0, 3);
     if (othersT.length < 3) { qs.push({ item: item, kind: "self", qText: item.q, choices: null, correctIdx: -1, explain: "" }); return; }
     if (Math.random() < 0.5) {
-      var c1 = shuffle([item.a].concat(othersT.map(function(o){ return o.a; })));
-      qs.push({ item: item, kind: "choice", qText: "「" + item.q + "」の説明として正しいものはどれ？", choices: c1, correctIdx: c1.indexOf(item.a), explain: item.a });
+      var pr1 = shuffle([{ t: item.a, src: item }].concat(othersT.map(function(o){ return { t: o.a, src: o }; })));
+      qs.push({ item: item, kind: "choice", qText: "「" + item.q + "」の説明として正しいものはどれ？", choices: pr1.map(function(p2){ return p2.t; }),
+        correctIdx: pr1.findIndex(function(p2){ return p2.src === item; }), explain: item.a,
+        choiceWhy: pr1.map(function(p2){ return p2.src === item ? null : "その説明は「" + p2.src.q + "」の説明です。"; }) });
     } else {
-      var c2 = shuffle([item.q].concat(othersT.map(function(o){ return o.q; })));
-      qs.push({ item: item, kind: "choice", qText: "次の説明に当てはまるものはどれ？\n" + item.a, choices: c2, correctIdx: c2.indexOf(item.q), explain: item.a });
+      var pr2 = shuffle([{ t: item.q, src: item }].concat(othersT.map(function(o){ return { t: o.q, src: o }; })));
+      qs.push({ item: item, kind: "choice", qText: "次の説明に当てはまるものはどれ？\n" + item.a, choices: pr2.map(function(p2){ return p2.t; }),
+        correctIdx: pr2.findIndex(function(p2){ return p2.src === item; }), explain: item.a,
+        choiceWhy: pr2.map(function(p2){ return p2.src === item ? null : "「" + p2.src.q + "」の説明は「" + trunc(p2.src.a, 50) + "」で、この問題の説明とは違います。"; }) });
     }
   });
   return qs;
@@ -495,7 +516,7 @@ function startReview(setId) {
   var list = setId ? state.wrong.filter(function(w){ return w.setId === setId; }) : state.wrong.slice();
   if (!list.length) { toast("復習する問題がありません"); return; }
   var fakeSet = { id: setId || "all", title: setId ? (getSet(setId) || {}).title + " の復習" : "まとめて復習" };
-  var items = shuffle(list).map(function(w){ return { q: w.q, a: w.a, ex: w.ex, ch: w.ch, qa: w.qa, fromSetId: w.setId }; });
+  var items = shuffle(list).map(function(w){ return { q: w.q, a: w.a, ex: w.ex, ch: w.ch, qa: w.qa, why: w.why || null, fromSetId: w.setId }; });
   var qs = items.map(function(item) {
     var set = getSet(item.fromSetId);
     var poolItems = set ? set.items : items;
@@ -559,7 +580,9 @@ function showFeedback() {
   var fb = document.getElementById("q-feedback");
   var ok = S.ok[S.idx];
   fb.className = "feedback " + (ok ? "ok" : "ng");
-  fb.innerHTML = "<b>" + (ok ? "正解！" : "不正解") + "</b>　正解は「" + esc(q.choices[q.correctIdx]) + "」<br>解説：" + esc(q.explain);
+  var why = (!ok && q.choiceWhy && S.picked[S.idx] !== null) ? q.choiceWhy[S.picked[S.idx]] : null;
+  fb.innerHTML = "<b>" + (ok ? "正解！" : "不正解") + "</b>　正解は「" + esc(q.choices[q.correctIdx]) + "」<br>解説：" + esc(q.explain)
+    + (why ? "<br>あなたの答えが違う理由：" + esc(why) : "");
   fb.classList.remove("hidden");
 }
 function showSelfAnswer() {
@@ -634,8 +657,10 @@ function finishQuiz() {
   document.getElementById("result-list").innerHTML = S.questions.map(function(q, i) {
     var yours = q.kind === "choice" ? (S.picked[i] !== null ? q.choices[S.picked[i]] : "（未回答）") : (S.ok[i] ? "分かった" : "分からなかった");
     var correct = q.kind === "choice" ? q.choices[q.correctIdx] : q.item.a;
+    var why2 = (!S.ok[i] && q.choiceWhy && S.picked[i] !== null && q.kind === "choice") ? q.choiceWhy[S.picked[i]] : null;
     return '<div class="review-item"><span class="mark ' + (S.ok[i] ? "ok-text" : "ng-text") + '">' + (S.ok[i] ? "○" : "×") + '</span> <b>' + esc(q.qText) + '</b><br>'
-      + 'あなたの答え：' + esc(yours) + '<br>正解：' + esc(correct) + '<br><span class="muted">解説：' + esc(q.explain || q.item.a) + '</span></div>';
+      + 'あなたの答え：' + esc(yours) + '<br>正解：' + esc(correct) + '<br><span class="muted">解説：' + esc(q.explain || q.item.a) + '</span>'
+      + (why2 ? '<br><span class="muted">あなたの答えが違う理由：' + esc(why2) + '</span>' : '') + '</div>';
   }).join("");
   document.getElementById("result-retry").onclick = function() {
     if (S.mode === "review") startReview(S.set.id === "all" ? null : S.set.id);
